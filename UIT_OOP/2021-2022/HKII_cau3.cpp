@@ -21,6 +21,7 @@ public:
     }
 
     virtual double ThanhTien() = 0;
+    
     virtual void InThongTinSach() {
         cout << "Ma sach: " << maSach << "\n";
         cout << "Ten sach: " << tenSach << "\n";
