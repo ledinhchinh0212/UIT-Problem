@@ -225,7 +225,7 @@ private:
     DauGoiDau *daugoidau;
     SuaTam *suatam;
 public:
-    Romantic(string maGoiSanPham, string loaiGoiSanPham, NuocHoa *nuochoa, DauGoiDau *DauGoiDau, SuaTam *suatam) : 
+    Romantic(string maGoiSanPham, string loaiGoiSanPham, NuocHoa *nuochoa, DauGoiDau *daugoidau, SuaTam *suatam) : 
     SanPham(maGoiSanPham, loaiGoiSanPham) {
         this->nuochoa = nuochoa;
         this->daugoidau = daugoidau;
@@ -245,7 +245,9 @@ public:
     }
 
     ~Romantic() {
-        delete nuochoa, daugoidau, suatam;
+        delete nuochoa; 
+        delete daugoidau; 
+        delete suatam;
     }
 };
 
@@ -257,7 +259,9 @@ private:
 public:
     FreshAir(string maGoiSanPham, string loaiGoiSanPham, NuocHoa *nuochoa, DauGoiDau *daugoidau, SuaTam *suatam) :
     SanPham(maGoiSanPham, loaiGoiSanPham) {
-        
+        this->nuochoa = nuochoa;
+        this->daugoidau = daugoidau;
+        this->suatam = suatam;
     }
 
     NuocHoa *&getNuocHoaptr() {
@@ -273,7 +277,9 @@ public:
     }
 
     ~FreshAir() {
-        delete nuochoa, daugoidau, suatam;
+        delete nuochoa; 
+        delete daugoidau; 
+        delete suatam;
     }
 };
 
@@ -293,8 +299,21 @@ public:
         this->giaDonHang = 0;
     }
 
+    double getGiaDonHang() {
+        Romantic *romantic = dynamic_cast<Romantic*>(sanPham);
+        FreshAir *freshAir = dynamic_cast<FreshAir*>(sanPham);
+        if(romantic != nullptr) {
+            return romantic->getNuocHoaptr()->GiaTien() + romantic->getDauGoiDauPtr()->GiaTien() + romantic->getSuaTamPtr()->GiaTien();
+        }
+        return freshAir->getNuocHoaptr()->GiaTien() + freshAir->getDauGoiDauPtr()->GiaTien() + freshAir->getSuaTamPtr()->GiaTien();
+
+        delete romantic;
+        delete freshAir;
+    }
+
     ~DonHang() {
-        delete thongTinKhachHang, sanPham;
+        delete thongTinKhachHang;
+        delete sanPham;
     }
 
     friend ostream &operator<<(ostream &out, DonHang &donhang) {
@@ -308,7 +327,7 @@ public:
 
         out << "\tNgay lap hoa don: " << donhang.ngayLapHoaDon << "\n";
 
-        out << "\tGia don hang: " << donhang.giaDonHang << "\n";
+        out << "\tGia don hang: " << donhang.getGiaDonHang() << "\n";
 
         out << "\tThong tin san pham\n";
         out << "\t\tMa goi san pham: " << donhang.sanPham->getMaGoiSanPham() << "\n";
@@ -324,6 +343,7 @@ public:
                 out << "\t\t\tMa so nuoc hoa: " << romanticPtr->getNuocHoaptr()->getMaSoNuocHoa() << "\n";
                 out << "\t\t\tLoai nuoc hoa: " << romanticPtr->getNuocHoaptr()->getLoaiNuocHoa() << "\n";
                 out << "\t\t\tDung tich: " << romanticPtr->getNuocHoaptr()->getDungTich() << "\n";
+                out << "\t\t\tGia tien: $" << romanticPtr->getNuocHoaptr()->GiaTien() << "\n";
                 
                 out << "\t\tDau goi dau:\n";
                 out << "\t\t\tMa so dau goi dau: " << romanticPtr->getDauGoiDauPtr()->getMaSoDauGoiDau() << "\n";
@@ -335,10 +355,13 @@ public:
                     out << "\t\t\tTieu chuan kiem dinh loai: " << daugoitockho->getTieuChuanKiemDinh() << "\n";
                 }
 
+                out << "\t\t\tGia tien: $" << romanticPtr->getDauGoiDauPtr()->GiaTien() << "\n";
+
                 out << "\t\tSua tam:\n";
                 out << "\t\t\tMa so sua tam: " << romanticPtr->getSuaTamPtr()->getMaSoSuaTam() << "\n";
                 out << "\t\t\tLoai sua tam: " << romanticPtr->getSuaTamPtr()->getLoaiSuaTam() << "\n";
                 out << "\t\t\tDung tich: " << romanticPtr->getSuaTamPtr()->getDungTich() << "\n";
+                out << "\t\t\tGia tien: $" << romanticPtr->getSuaTamPtr()->GiaTien() << "\n";
 
                 delete daugoitockho;
             }
@@ -347,6 +370,8 @@ public:
                 out << "\t\t\tLoai nuoc hoa: " << FreshAirPtr->getNuocHoaptr()->getLoaiNuocHoa() << "\n";
                 out << "\t\t\tMa so nuoc hoa: " << FreshAirPtr->getNuocHoaptr()->getMaSoNuocHoa() << "\n";
                 out << "\t\t\tDung tich: " << FreshAirPtr->getNuocHoaptr()->getLoaiNuocHoa() << "\n";
+                out << "\t\t\tGia tien: $" << FreshAirPtr->getNuocHoaptr()->GiaTien() << "\n";
+
 
                 out << "\t\tDau goi dau:\n";
                 out << "\t\t\tMa so dau goi dau: " << FreshAirPtr->getDauGoiDauPtr()->getMaSoDauGoiDau() << "\n";
@@ -358,17 +383,20 @@ public:
                     out << "\t\t\tTieu chuan kiem dinh loai: " << daugoitockho->getTieuChuanKiemDinh() << "\n";
                 }
 
+                out << "\t\t\tGia tien: $" << FreshAirPtr->getDauGoiDauPtr()->GiaTien() << "\n";
+
                 out << "\t\tSua tam:\n";
                 out << "\t\t\tMa so sua tam: " << FreshAirPtr->getSuaTamPtr()->getMaSoSuaTam() << "\n";
                 out << "\t\t\tLoai sua tam: " << FreshAirPtr->getSuaTamPtr()->getLoaiSuaTam() << "\n";
                 out << "\t\t\tDung tich: " << FreshAirPtr->getSuaTamPtr()->getDungTich() << "\n";
-
+                out << "\t\t\tGia tien: $" << FreshAirPtr->getSuaTamPtr()->GiaTien() << "\n";
                 delete daugoitockho;
             }
 
             // free data pointers
             //**$
-            delete romanticPtr, FreshAirPtr;
+            delete romanticPtr;
+            delete FreshAirPtr;
         }
         else {
             out << "Chua co thong tin cac loai san pham !\n";
@@ -390,6 +418,7 @@ int main() {
         string maDonHang; cin >> maDonHang;
         cout << "\tNgay lap don hang: ";
         string ngayLapHoaDon; cin >> ngayLapHoaDon;
+
         cout << "\tThong tin khach hang: \n";
         cout << "\t\tMa khach hang: ";
         string maKhachHang; cin >> maKhachHang;
@@ -456,7 +485,7 @@ int main() {
         string tenSuaTam; cin.ignore();
         getline(cin, tenSuaTam);            // xac dinh loai sua tam: da kho, da nhon
         cout << "\t\tNhap dung tich: ";
-        float dungTichSuaTam; cin >> dungTichDauGoi;
+        float dungTichSuaTam; cin >> dungTichSuaTam;
         
         SanPham *sanpham = nullptr;
         NuocHoa *nuochoa = nullptr;
@@ -498,12 +527,12 @@ int main() {
 
         // add don hang
         danhSachDonHang.push_back(new DonHang(maDonHang, thongTinKhachHang, ngayLapHoaDon, sanpham));
-
     }
 
-    // print information customers
+    // print information customers and writes file
     for(int i = 0; i < N; i++) {
         cout << *danhSachDonHang[i];
+        cout << "\n";
     }
 
     // free data ptr
