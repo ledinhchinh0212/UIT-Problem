@@ -9,6 +9,7 @@ private:
 public:
     IntArr(){
         this->count = 0;
+        this->values = nullptr;
     }
 
     ~IntArr() {
