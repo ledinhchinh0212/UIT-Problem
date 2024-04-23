@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -55,16 +56,25 @@ class NotNhac : public KyHieu{
 private:
     int caoDo;
     string tenNot[8];
+    string tenHinhNot[8];
+    map<float, int> mucTruongDoTuongUng;
+
 public: 
     NotNhac();
     void Nhap() override;
     int LayCaoDo() const override;
     int getCaoDo() const;
     string getTenNot(int idx) const;
+    string getTenHinhNot(float idx) const;
 };
 
 string NotNhac::getTenNot(int idx) const {
     return tenNot[idx];
+}
+
+string NotNhac::getTenHinhNot(float idx) const {
+    int x = mucTruongDoTuongUng.at(idx);
+    return tenHinhNot[x];
 }
 
 int NotNhac::getCaoDo() const {
@@ -79,6 +89,22 @@ NotNhac::NotNhac() {
     tenNot[5] = "Son(G)";
     tenNot[6] = "La(A)";
     tenNot[7] = "Si(B)";
+    //
+    tenHinhNot[1] = "Tron";
+    tenHinhNot[2] = "Trang";
+    tenHinhNot[3] = "Den";
+    tenHinhNot[4] = "Moc don";
+    tenHinhNot[5] = "Moc kep";
+    tenHinhNot[6] = "Moc tam";
+    tenHinhNot[7] = "Moc tu";
+    //
+    mucTruongDoTuongUng.insert({4, 1});
+    mucTruongDoTuongUng.insert({2, 2});
+    mucTruongDoTuongUng.insert({1, 3});
+    mucTruongDoTuongUng.insert({0.5, 4});
+    mucTruongDoTuongUng.insert({0.25, 5});
+    mucTruongDoTuongUng.insert({0.125, 6});
+    mucTruongDoTuongUng.insert({0.0625, 7});
 }
 
 
@@ -153,7 +179,8 @@ int main() {
     }
     else {
         NotNhac *notNhac = dynamic_cast<NotNhac*>(banNhac[idx]);
-        cout << "Not nhac co cao do cao nhat trong ban nhac: " << notNhac->getTenNot(notNhac->getCaoDo()) << "\n";
+        cout << "Not nhac co cao do cao nhat trong ban nhac: " << notNhac->getTenNot(notNhac->getCaoDo()) << " " << 
+                                                                  notNhac->getTenHinhNot(notNhac->getTruongDo());
         delete notNhac;
     }
     
