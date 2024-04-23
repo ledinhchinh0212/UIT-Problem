@@ -9,7 +9,7 @@ protected:
     float truongDo;
 public:
     virtual void Nhap();
-    virtual bool LaDauLang();
+    virtual bool LaDauLang() const;
     virtual int LayCaoDo() const = 0;
     float getTruongDo() const;
 };
@@ -18,7 +18,7 @@ float KyHieu::getTruongDo() const {
     return truongDo;
 }
 
-bool KyHieu::LaDauLang() {
+bool KyHieu::LaDauLang() const {
     return false;
 }
 
@@ -125,7 +125,7 @@ void NotNhac::Nhap() {
 class DauLang : public KyHieu {
 public:
     void Nhap() override;
-    bool LaDauLang() override;
+    bool LaDauLang() const override;
     int LayCaoDo() const override;
 };
 
@@ -133,7 +133,7 @@ int DauLang::LayCaoDo() const {
     return 0;
 }
 
-bool DauLang::LaDauLang() {
+bool DauLang::LaDauLang() const {
     return true;
 }
 
