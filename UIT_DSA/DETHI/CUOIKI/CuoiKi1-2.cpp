@@ -50,6 +50,7 @@ public:
             delete temp;
             temp == nullptr;
         }
+        head = tail = nullptr;
     }
 };
 
