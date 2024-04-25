@@ -21,10 +21,12 @@ void PhanSo::Xuat() {
 }
 
 int PhanSo::gcd(int a, int b) {
-    if(b != 0) {
-        gcd(b, a % b);
+    if(b == 0) {
+        return a;
     }
-    return a;
+    else {
+        return gcd(b, a % b);
+    }
 }
 
 void PhanSo::RutGon() {
@@ -34,6 +36,12 @@ void PhanSo::RutGon() {
 }
 
 int main() {
+
+    PhanSo phanSo;
+    phanSo.Nhap();
+    phanSo.RutGon();
+    phanSo.Xuat();
+    // dam bao rang mau luon khac 0
 
     return 0;
 }
