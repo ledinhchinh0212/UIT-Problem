@@ -2,6 +2,7 @@
 #include <exception>
 #include <climits>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 
@@ -55,7 +56,7 @@ bool Stack::empty() const {
 void Stack::pop() {
     if(this->stack_Size_Class == 0) {
         cout << "Invalid\n";
-        throw std::invalid_argument("Invalid last element");
+        throw runtime_error("out of size Stack");
     }
     else {
         int *copy_Stack_Array_Stack = new int[this->stack_Size_Class - 1];
@@ -70,6 +71,19 @@ void Stack::pop() {
 }
 
 int main() {
+
+    Stack stack;
+    stack.push(4);
+    stack.push(100);
+    stack.push(1030);
+    stack.push(6);
+    while(!stack.empty()) {
+        cout << stack.top() << " ";
+        stack.pop();
+    }
+
+    stack.pop();
+    cout << stack.top();
 
     return 0;
 }
