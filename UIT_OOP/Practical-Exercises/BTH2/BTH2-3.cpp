@@ -103,8 +103,11 @@ istream &operator>>(istream &in, TestCandidate &testCandidate) {
 }
 
 void TestCandidate::ThongTinSinhVienTheoDieuKienTongDiem(int condition) {
+    if(this->listCandidate == nullptr) {
+        return;
+    }
     for(int i = 0; i < size; i++) {
-        if(this->listCandidate[i].tongDiem() > condition && this->listCandidate != nullptr) {
+        if(this->listCandidate[i].tongDiem() > condition) {
             cout << this->listCandidate[i] << "\n";
             cout << "Tong diem: " << this->listCandidate[i].tongDiem() << "\n";
         }
