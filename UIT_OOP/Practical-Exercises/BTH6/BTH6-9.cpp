@@ -15,6 +15,14 @@ public:
     bool operator==(const Integer &integer);
     friend istream &operator>>(istream &in, Integer &integer);
     friend ostream &operator<<(ostream &out, const Integer &integer);
+    Integer operator+(const Integer &integer);
+    Integer operator-(const Integer &integer);
+    Integer operator*(const Integer &integer);
+    Integer operator/(const Integer &integer);
+    Integer &operator++();
+    Integer &operator--();
+    Integer &operator++(int);
+    Integer &operator--(int);
 };
 
 Integer::Integer(int integer) {
@@ -56,13 +64,46 @@ ostream &operator<<(ostream &out, const Integer &integer) {
     return out;
 }
 
+Integer Integer::operator+(const Integer &integer) {
+    return Integer(this->integer + integer.integer);
+}
+
+Integer Integer::operator-(const Integer &integer) {
+    return Integer(this->integer - integer.integer);
+}
+
+Integer Integer::operator*(const Integer &integer) {
+    return Integer(this->integer * integer.integer);
+}
+
+Integer Integer::operator/(const Integer &integer) {
+    return Integer(this->integer / integer.integer);
+}
+
+Integer &Integer::operator++() {
+    this->integer += 1;
+    return *this;
+}
+
+Integer &Integer::operator--() {
+    this->integer -= 1;
+    return *this;
+}
+
+Integer &Integer::operator++(int) {
+    return ++*this;
+}
+
+Integer &Integer::operator--(int) {
+    return --*this;
+}
 
 int main() {
 
     Integer n = 5;
     Integer m = 6;
-    cin >> n;
-    cout << n << " " << m;
+    cout << ++n << " " << m++ << "\n";
+    cout << n << " " << ++m;
 
     return 0;
 }
