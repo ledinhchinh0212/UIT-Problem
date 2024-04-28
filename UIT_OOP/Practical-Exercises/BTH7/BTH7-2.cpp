@@ -127,38 +127,26 @@ void CaSi::Xuat() {
 
 int main() {
 
-    cout << "Nhap so doi tuong: ";
-    int size; cin >> size;
-
-    vector<ConNguoi*> conNguoi(size);
-
-    for(int i = 0; i < size; i++) {
-        cout << "1. Hoc sinh, 2. Cong nhan, 3. Nghe si, 4. Ca si: ";
-        int type; cin >> type;
-        if(type == 1) {
-            conNguoi[i] = new HocSinh();
-        }
-        else if(type == 2) {
-            conNguoi[i] = new CongNhan();
-        }
-        else if(type == 3) {
-            conNguoi[i] = new NgheSi();
-        }
-        else {
-            conNguoi[i] = new CaSi();
-        }
-        conNguoi[i]->Nhap();
+    cout << "1. Hoc sinh, 2. Cong nhan, 3. Nghe si, 4. Ca si: ";
+    int type; cin >> type;
+    ConNguoi *conNguoi = nullptr;
+    if(type == 1) {
+        conNguoi = new HocSinh();
     }
-
-    cout << "Thong tin cua cac doi tuong:\n";
-    for(int i = 0; i < size; i++) {
-        conNguoi[i]->Xuat();
-        cout << "\n";
+    else if(type == 2) {
+        conNguoi = new CongNhan();
     }
-
-    for(int i = 9; i < size; i++) {
-        delete conNguoi[i];
+    else if(type == 3) {
+        conNguoi = new NgheSi();
     }
-
+    else if(type == 4){  
+        conNguoi = new CaSi();
+    }
+    if(conNguoi != nullptr) {
+        conNguoi->Nhap();
+        conNguoi->Xuat();
+        
+        delete conNguoi;
+    }
     return 0;
 }
