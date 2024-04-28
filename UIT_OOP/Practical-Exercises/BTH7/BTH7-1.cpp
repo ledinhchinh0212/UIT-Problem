@@ -22,7 +22,7 @@ ostream &operator<<(ostream &out, const Date &date) {
 }
 
 class NhanVien {
-private:
+protected:
     string hoTen;
     Date ngaySinh; 
 public:
