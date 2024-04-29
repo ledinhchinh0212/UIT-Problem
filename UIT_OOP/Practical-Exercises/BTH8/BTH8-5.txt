@@ -1,0 +1,5 @@
+- sử dụng liên kết động có thể tiết kiệm bộ nhớ hơn không dùng liên kết động
+
+- sử dụng liên kết động thể hiện tính đa hình rõ hơn ...
+- nếu không sử dụng liên kết động thì sẽ xác định "cứng" kiểu dữ liệu của đối tượng luôn chứ không xác định trong quá
+trình chạy như liên kết động (runtime binding)
