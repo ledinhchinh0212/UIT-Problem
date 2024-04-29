@@ -64,10 +64,10 @@ T Program<T>::maxCuaHaiPhanTu(T a, T b) {
 
 template<typename T>
 T Program<T>::phanTuDuongLonNhat(T a, T b) {
-    if(a > 0 && b < 0) {
+    if(a > 0 && b <= 0) {
         return a;
     }
-    else if(a < b && b > 0) {
+    else if(a <= 0 && b > 0) {
         return b;
     }
     if(a == b == 0 || (a < 0 && b < 0)) {
