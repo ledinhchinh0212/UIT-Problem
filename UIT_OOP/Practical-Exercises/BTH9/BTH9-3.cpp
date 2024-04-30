@@ -102,7 +102,6 @@ int main() {
     int soDonHang;
     float donGiaHang;
     int soNamThanThiet;
-    cout << x << " - " << y << " - " << z << "\n";
     for(int i = 0; i < n; i++) {
         file.ignore();
         getline(file, tenKhachHang);
@@ -117,9 +116,6 @@ int main() {
         else {
             khachHang[i] = new KhachHangDacBiet(tenKhachHang, soDonHang, donGiaHang);
         }
-        cout << tenKhachHang << "\n";
-        cout << soDonHang << "\n";
-        cout << donGiaHang << "\n\n";
     }
     file.close();
     ofstream openFile;
