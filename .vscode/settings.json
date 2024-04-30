@@ -3,7 +3,10 @@
         "stdexcept": "cpp",
         "iosfwd": "cpp",
         "iostream": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "fstream": "cpp",
+        "new": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
