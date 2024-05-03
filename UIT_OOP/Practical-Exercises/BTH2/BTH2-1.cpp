@@ -7,7 +7,7 @@ private:
     int tu;
     int mau;
 public:
-    PhanSo(int tu = 0, int mauS = 1);
+    PhanSo(int tu = 0, int mau = 1);
     void setTu(int tu);
     void setMau(int mau);
     int gcd(int tu, int mau) const;
@@ -17,7 +17,13 @@ public:
     PhanSo operator-(const PhanSo &phanSo);
     PhanSo operator*(const PhanSo &phanSo);
     PhanSo operator/(const PhanSo &phanSo);
+    friend PhanSo operator+(int value, const PhanSo &b);
 };
+
+PhanSo operator+(int value, const PhanSo &b) {
+    PhanSo temp(value);
+    return temp + b;
+}
 
 int PhanSo::gcd(int tu, int mau) const {
     if(mau == 0) {
@@ -83,5 +89,8 @@ int main() {
     cout << "Hieu: " << a - b << "\n";
     cout << "Tich: " << a * b << "\n";
     cout << "Thuong: " << a / b << "\n";
+
+    cout << 2 + a;
+
     return 0;
 }
