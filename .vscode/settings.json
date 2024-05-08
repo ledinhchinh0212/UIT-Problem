@@ -7,7 +7,9 @@
         "algorithm": "cpp",
         "fstream": "cpp",
         "new": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "array": "cpp",
+        "string": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
